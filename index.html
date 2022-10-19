@@ -5,27 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind play cdn -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind_config.js"></script>
+
+  <!-- Alpine.js  -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
   <title>Frontend Mentor | Launch countdown timer</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
-<body>
+<body class="antialiased bg-blue-dark">
+    <div class="absolute inset-0">
+      <img class="object-cover object-center w-full h-full grow" src="./images/bg-stars.svg" alt="starry background">
+    </div>
+    <div class="absolute inset-x-0 bottom-0 overflow-hidden h-1/4 xl:h-auto">
+      <img class="object-cover object-[right_-10rem_bottom_0px] w-full h-full md:object-center" src="./images/pattern-hills.svg" alt="pattern impression of hills">
+    </div>
+  <main class="relative mt-32 px-4">
+    <h1 class="font-bold text-lg tracking-[.4rem] leading-6 text-white uppercase pt-4 text-center">We're launching soon</h1>
+    <section>
+      <h2 class="sr-only">countdown timer</h2>
+      <div class="flex items-center justify-center">
+        <div>
+          <span class="text-red font-bold text-5xl">12</span>
+          <span class="font-bold text-sm text-blue-gray">Days</span>
+        </div>
+        <div>
+          <span class="text-red font-bold text-5xl">12</span>
+          <span class="font-bold text-sm text-blue-gray">Hours</span>
+        </div>
+        <div>
+          <span class="text-red font-bold text-5xl">12</span>
+          <span class="font-bold text-sm text-blue-gray">Minutes</span>
+        </div>
+        <div>
+          <span class="text-red font-bold text-5xl">12</span>
+          <span class="font-bold text-sm text-blue-gray">Seconds</span>
+        </div>
+      </div>
+    </section>
+  </main>
+<footer class="absolute  bottom-0 inset-x-0 px-4 pb-12">
+  <ul class="flex gap-8 mx-auto max-w-xs justify-center items-center">
+    <li>
+      <a href="#">
+        <img src="./images/icon-facebook.svg" alt="facebook">
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <img src="./images/icon-pinterest.svg" alt="pinterest">
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <img src="./images/icon-instagram.svg" alt="instagram">
+      </a>
+    </li>
+  </ul>
+</footer>
 
-  We're launching soon
-
-  Days
-  Hours
-  Minutes
-  Seconds
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <script type="text/javascript" src="./js/countdown.js"></script>
 </body>
 </html>
