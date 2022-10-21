@@ -18,6 +18,28 @@
   <!-- Alpine.js  -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+  <style>
+    .perspective {
+      perspective: 180px;
+    }
+    @media (min-width: 768px) {
+      .perspective {
+        perspective: 400px;
+      }
+    }
+    .transform-3d {
+      transform-style: preserve-3d;
+    }
+    .origin-bottom {
+      transform-origin: bottom;
+    }
+    .backface-hidden {
+      backface-visibility: hidden
+    }
+    .rotate-x {
+      transform:rotateX(180deg)
+    }
+  </style>
 
   <title>Frontend Mentor | Launch countdown timer</title>
 
@@ -33,12 +55,26 @@
     <h1 class="font-bold text-lg tracking-[.4rem] leading-6 text-white uppercase pt-3.5 text-center sm:text-2xl">We're launching soon</h1>
     <section class="mt-14 md:mt-24">
       <h2 class="sr-only">countdown timer</h2>
-      <div class="flex items-center justify-center gap-3.5 md:gap-8">
+      <div x-data="countdownJS()" class="flex items-center justify-center gap-3.5 md:gap-8">
         <div>
-          <div class="relative w-[68px] h-[66px] bg-blue-des flex flex-col items-center p-3.5 rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:pt-[30px] md:rounded-lg md:shadow-bold-bottom-lg">
-            <span class="text-red font-bold text-[35px] leading-none md:text-[80px]">08</span>
-            <div class="absolute inset-x-0 top-0 h-1/2 overflow-hidden flex justify-center pt-3.5 rounded-t bg-blue-dark/30 md:pt-[30px] md:rounded-t-lg">
-              <span class="text-red-shaded font-bold text-[35px] leading-none md:text-[80px]">08</span>
+          <div class="perspective w-[68px] h-[66px] bg-blue-des rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:rounded-lg md:shadow-bold-bottom-lg">
+            <div class="absolute bottom-0 w-full h-1/2 bg-blue-des grid place-content-center rounded-b overflow-hidden md:rounded-b-lg">
+              <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="days.current"></span>
+            </div>
+            <div class="absolute top-0 w-full h-1/2 bg-blue-des rounded-t md:rounded-t-lg">
+              <div class="w-full h-full bg-blue-dark/30 grid place-content-center overflow-hidden">
+                <span class="text-red-shaded font-bold text-4xl translate-y-[calc(50%-1.5px)] leading-none md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="days.next"></span>
+              </div>
+            </div>
+            <div class="transform-3d origin-bottom relative w-[68px] h-[33px] md:w-[146px] md:h-[70px] animate-flip">
+              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+                <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
+                  <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="days.current"></span>
+                </div>
+              </div>
+              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+                <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="days.next"></span>
+              </div>
             </div>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute left-0 top-1/2 -translate-y-[3px] -translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute right-0 top-1/2 -translate-y-[3px] translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
@@ -46,10 +82,24 @@
           <p class="mt-3 text-[8.5px] tracking-[0.3em] uppercase text-center text-blue-gray md:text-base md:mt-6">Days</p>
         </div>
         <div>
-          <div class="relative w-[68px] h-[66px] bg-blue-des flex flex-col items-center p-3.5 rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:pt-[30px] md:rounded-lg md:shadow-bold-bottom-lg">
-            <span class="text-red font-bold text-[35px] leading-none md:text-[80px]">23</span>
-            <div class="absolute inset-x-0 top-0 h-1/2 overflow-hidden flex justify-center pt-3.5 rounded-t bg-blue-dark/30 md:pt-[30px] md:rounded-t-lg">
-              <span class="text-red-shaded font-bold text-[35px] leading-none md:text-[80px]">23</span>
+          <div class="perspective w-[68px] h-[66px] bg-blue-des rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:rounded-lg md:shadow-bold-bottom-lg">
+            <div class="absolute bottom-0 w-full h-1/2 bg-blue-des grid place-content-center rounded-b overflow-hidden md:rounded-b-lg">
+              <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="hours.current"></span>
+            </div>
+            <div class="absolute top-0 w-full h-1/2 bg-blue-des rounded-t md:rounded-t-lg">
+              <div class="w-full h-full bg-blue-dark/30 grid place-content-center overflow-hidden">
+                <span class="text-red-shaded font-bold text-4xl translate-y-[calc(50%-1.5px)] leading-none md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="hours.next"></span>
+              </div>
+            </div>
+            <div class="transform-3d origin-bottom relative w-[68px] h-[33px] md:w-[146px] md:h-[70px] animate-flip">
+              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+                <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
+                  <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="hours.current"></span>
+                </div>
+              </div>
+              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+                <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="hours.next"></span>
+              </div>
             </div>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute left-0 top-1/2 -translate-y-[3px] -translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute right-0 top-1/2 -translate-y-[3px] translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
@@ -57,10 +107,24 @@
           <p class="mt-3 text-[8.5px] tracking-[0.3em] uppercase text-center text-blue-gray md:text-base md:mt-6">Hours</p>
         </div>
         <div>
-          <div class="relative w-[68px] h-[66px] bg-blue-des flex flex-col items-center p-3.5 rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:pt-[30px] md:rounded-lg md:shadow-bold-bottom-lg">
-            <span class="text-red font-bold text-[35px] leading-none md:text-[80px]">55</span>
-            <div class="absolute inset-x-0 top-0 h-1/2 overflow-hidden flex justify-center pt-3.5 rounded-t bg-blue-dark/30 md:pt-[30px] md:rounded-t-lg">
-              <span class="text-red-shaded font-bold text-[35px] leading-none md:text-[80px]">55</span>
+          <div class="perspective w-[68px] h-[66px] bg-blue-des rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:rounded-lg md:shadow-bold-bottom-lg">
+            <div class="absolute bottom-0 w-full h-1/2 bg-blue-des grid place-content-center rounded-b overflow-hidden md:rounded-b-lg">
+              <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="minutes.current"></span>
+            </div>
+            <div class="absolute top-0 w-full h-1/2 bg-blue-des rounded-t md:rounded-t-lg">
+              <div class="w-full h-full bg-blue-dark/30 grid place-content-center overflow-hidden">
+                <span class="text-red-shaded font-bold text-4xl translate-y-[calc(50%-1.5px)] leading-none md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="minutes.next"></span>
+              </div>
+            </div>
+            <div class="transform-3d origin-bottom relative w-[68px] h-[33px] md:w-[146px] md:h-[70px] animate-flip">
+              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+                <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
+                  <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="minutes.current"></span>
+                </div>
+              </div>
+              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+                <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="minutes.next"></span>
+              </div>
             </div>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute left-0 top-1/2 -translate-y-[3px] -translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute right-0 top-1/2 -translate-y-[3px] translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
@@ -68,10 +132,24 @@
           <p class="mt-3 text-[8.5px] tracking-[0.3em] uppercase text-center text-blue-gray md:text-base md:mt-6">Minutes</p>
         </div>
         <div>
-          <div class="relative w-[68px] h-[66px] bg-blue-des flex flex-col items-center p-3.5 rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:pt-[30px] md:rounded-lg md:shadow-bold-bottom-lg">
-            <span class="text-red font-bold text-[35px] leading-none md:text-[80px]">41</span>
-            <div class="absolute inset-x-0 top-0 h-1/2 overflow-hidden flex justify-center pt-3.5 rounded-t bg-blue-dark/30 md:pt-[30px] md:rounded-t-lg">
-              <span class="text-red-shaded font-bold text-[35px] leading-none md:text-[80px]">41</span>
+          <div class="perspective w-[68px] h-[66px] bg-blue-des rounded shadow-bold-bottom md:w-[146px] md:h-[140px] md:rounded-lg md:shadow-bold-bottom-lg">
+            <div class="absolute bottom-0 w-full h-1/2 bg-blue-des grid place-content-center rounded-b overflow-hidden md:rounded-b-lg">
+              <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="seconds.current"></span>
+            </div>
+            <div class="absolute top-0 w-full h-1/2 bg-blue-des rounded-t md:rounded-t-lg">
+              <div class="w-full h-full bg-blue-dark/30 grid place-content-center overflow-hidden">
+                <span class="text-red-shaded font-bold text-4xl translate-y-[calc(50%-1.5px)] leading-none md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="seconds.next"></span>
+              </div>
+            </div>
+            <div class="transform-3d origin-bottom relative w-[68px] h-[33px] md:w-[146px] md:h-[70px] animate-flip">
+              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+                <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
+                  <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="seconds.current"></span>
+                </div>
+              </div>
+              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+                <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="seconds.next"></span>
+              </div>
             </div>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute left-0 top-1/2 -translate-y-[3px] -translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
             <span class="bg-blue-dark rounded-full h-1.5 w-1.5 absolute right-0 top-1/2 -translate-y-[3px] translate-x-1/2 md:h-3 md:w-3 md:-translate-y-1.5"></span>
