@@ -22,7 +22,7 @@ tailwind.config = {
                 'bold-bottom-lg': '0 12px 3px -3px hsl(234, 17%, 12%)',
             },
             animation: {
-                'flip': 'flip 900ms cubic-bezier(1, 0.24, 0.65, 0.95) infinite'
+                'flip': 'flip 850ms cubic-bezier(1, 0.24, 0.65, 0.95) infinite'
             },
             keyframes: {
                 flip: {
