@@ -1,53 +1,82 @@
 window.countdownJS = function() {
     return {
-        // countDown: Alpine.$persist(true),
-        days: {current: 14, next: 13},
-        hours: {current: 20, next: 19},
-        minutes: {current: 24, next: 23},
-        seconds: {current: 12, next: 11},
         flipDay: false,
         flipHour: false,
         flipMinute: false,
         flipSecond: false,
 
-        get launchDate() {
+        // launchDate: Alpine.$persist(),
+        // launch: this.now,
+        // launchDate: this.launch.setDate(this.now.getDate() + 14),
 
 
-            let countDown = setInterval(function(){
-                Date.prototype.addDays = function(days) {
-                    let launch = new Date(this.valueOf());
-                    launch.setDate(launch.getDate() + days);
-                    return launch;
-                }
-                let launch = new Date();
-                console.log(launch.addDays(14));
-                let now = new Date().getTime();
+        // set launchdate (14 days from now) , save this date with persist
+        // find time now
+        // find difference now - launchdate
+        // calculate difference every second
 
-                let timeToLaunch = launch - now;
+        // show time
+        // change back card
+        // animate
+        // change front card
+        // repeat
+        // reset to 14 days when time is up
 
-                let days = {};
-                let hours = {};
-                let minutes = {};
-                let seconds = {};
+        showCount : {},
 
-                days.current = Math.floor(timeToLaunch / (1000 * 60 * 60 * 24));
-                hours.current = Math.floor(timeToLaunch % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-                minutes.current = Math.floor(timeToLaunch % (1000 * 60 * 60) / (1000 * 60));
-                seconds.current = Math.floor(timeToLaunch % (1000 * 60) / 1000);
+        makeTimer() {
+        let launchDate = new Date("October 30, 2022 20:00:00");
+        let launchSeconds = Date.parse(launchDate) / 1000;
 
-                if (days.current < '0') { days.current = '00';}
-                if (hours.current < '10') { hours.current = '0' + hours.current;}
-                if (hours.current < '0' || '24') { hours.current = '00';}
-                if (minutes.current < '10') { minutes.current = '0' + minutes.current;}
-                if (minutes.current < '0' || '60') { minutes.current = '00';}
-                if (seconds.current < '10') { seconds.current = '0' + seconds.current;}
-                if (seconds.current < '0' || '60') { seconds.current = '00';}
+        let now = new Date();
+        let nowSeconds = Date.parse(now) / 1000;
 
-                console.log('now: ' + days.current + 'd ' + hours.current + 'h ' + minutes.current + 'm ' + seconds.current)
-                console.log('next: ' + days.next + ' ' + hours.next + ' ' + minutes.next + ' ' + seconds.next)
+        let timeLeft = launchSeconds - nowSeconds;
 
-            }, 1000);
+        let launchSet = {}
+        launchSet.days = Math.floor(timeLeft / 86400);
+        launchSet.hours = Math.floor((timeLeft - launchSet.days * 86400) / 3600);
+        launchSet.minutes = Math.floor((timeLeft - launchSet.days * 86400 - launchSet.hours * 3600) / 60);
+        launchSet.seconds = Math.floor(
+            timeLeft - launchSet.days * 86400 - launchSet.hours * 3600 - launchSet.minutes * 60
+        );
+
+        if (launchSet.days < "10") {
+            launchSet.days = "0" + launchSet.days;
+        }
+        if (launchSet.days < "0") {
+            launchSet.days = "00";
+        }
+        if (launchSet.hours < "10") {
+            launchSet.hours = "0" + launchSet.hours;
+        }
+        if (launchSet.hours < "0") {
+            launchSet.hours = "00";
+        }
+        if (launchSet.minutes < "10") {
+            launchSet.minutes = "0" + launchSet.minutes;
+        }
+        if (launchSet.minutes < "0") {
+            launchSet.minutes = "00";
+        }
+        if (launchSet.seconds < "10") {
+            launchSet.seconds = "0" + launchSet.seconds;
+        }
+        if (launchSet.seconds < "0") {
+            launchSet.seconds = "00";
+        }
+
+        return this.showCount = launchSet;
+    },
+
+        startCountDown() {
+            setInterval(() => {
+                // if() {
+                    this.makeTimer();
+                // }
+            }, 1000)
         },
+
     }
 
 }
