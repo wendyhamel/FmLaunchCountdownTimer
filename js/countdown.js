@@ -20,10 +20,14 @@ window.countdownJS = function() {
             let nowInSeconds = Date.parse(now) / 1000;
             let secondsToLaunch = launchInSeconds - nowInSeconds;
 
-            this.timeToLaunch.days = Math.floor(secondsToLaunch / 86400);
-            this.timeToLaunch.hours = Math.floor((secondsToLaunch - this.timeToLaunch.days * 86400) / 3600);
-            this.timeToLaunch.minutes = Math.floor((secondsToLaunch - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600) / 60);
-            this.timeToLaunch.seconds = Math.floor(secondsToLaunch - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600 - this.timeToLaunch.minutes * 60);
+            const dayInSeconds = 86400;
+            const hourInSeconds = 3600;
+            const minuteInSeconds = 60;
+
+            this.timeToLaunch.days = Math.floor(secondsToLaunch / dayInSeconds);
+            this.timeToLaunch.hours = Math.floor((secondsToLaunch - this.timeToLaunch.days * dayInSeconds) / hourInSeconds);
+            this.timeToLaunch.minutes = Math.floor((secondsToLaunch - this.timeToLaunch.days * dayInSeconds - this.timeToLaunch.hours * hourInSeconds) / minuteInSeconds);
+            this.timeToLaunch.seconds = Math.floor(secondsToLaunch - this.timeToLaunch.days * dayInSeconds - this.timeToLaunch.hours * hourInSeconds - this.timeToLaunch.minutes * minuteInSeconds);
 
             for(const timeUnit in this.timeToLaunch) {
                 this.timeToLaunch[timeUnit] = String(this.timeToLaunch[timeUnit]).padStart(2,'0');
