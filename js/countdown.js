@@ -17,9 +17,9 @@ window.countdownJS = function() {
         setCountdown() {
             let launchInSeconds = Date.parse(this.launchDate) / 1000;
             let now = new Date();
-            let nowSeconds = Date.parse(now) / 1000;
+            let nowInSeconds = Date.parse(now) / 1000;
 
-            let secondsToLaunch = launchInSeconds - nowSeconds;
+            let secondsToLaunch = launchInSeconds - nowInSeconds;
 
             this.timeToLaunch.days = Math.floor(secondsToLaunch / 86400);
             this.timeToLaunch.hours = Math.floor((secondsToLaunch - this.timeToLaunch.days * 86400) / 3600);
