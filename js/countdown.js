@@ -53,7 +53,6 @@ window.countdownJS = function() {
                 this.timeToLaunch.seconds = "00";
             }
 
-            return this.timeToLaunch = this.timeToLaunch;
         },
 
         init() {
