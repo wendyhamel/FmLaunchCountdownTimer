@@ -15,18 +15,16 @@ window.countdownJS = function() {
         },
 
         setCountdown() {
-            let launchSeconds = Date.parse(this.launchDate) / 1000;
-
+            let launchInSeconds = Date.parse(this.launchDate) / 1000;
             let now = new Date();
             let nowSeconds = Date.parse(now) / 1000;
 
-            let secondsToLaunch = launchSeconds - nowSeconds;
+            let secondsToLaunch = launchInSeconds - nowSeconds;
 
             this.timeToLaunch.days = Math.floor(secondsToLaunch / 86400);
             this.timeToLaunch.hours = Math.floor((secondsToLaunch - this.timeToLaunch.days * 86400) / 3600);
             this.timeToLaunch.minutes = Math.floor((secondsToLaunch - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600) / 60);
             this.timeToLaunch.seconds = Math.floor(secondsToLaunch - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600 - this.timeToLaunch.minutes * 60);
-
 
             if (this.timeToLaunch.days < "10") {
                 this.timeToLaunch.days = "0" + this.timeToLaunch.days;
@@ -52,7 +50,6 @@ window.countdownJS = function() {
             else if (this.timeToLaunch.seconds < "0") {
                 this.timeToLaunch.seconds = "00";
             }
-
         },
 
         init() {
