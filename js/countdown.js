@@ -25,15 +25,21 @@ window.countdownJS = function() {
         countTime: {},
         showCount: {
             back: {
+                days: '',
+                hours: '',
+                minutes: '',
                 seconds: ''
             },
             front: {
+                days: '',
+                hours: '',
+                minutes: '',
                 seconds: ''
             }
         },
 
         setCountdown() {
-            let launchDate = new Date("October 30, 2022 20:00:00");
+            let launchDate = new Date("October 30, 2022 13:55:00");
             let launchSeconds = Date.parse(launchDate) / 1000;
 
             let now = new Date();
@@ -84,13 +90,31 @@ window.countdownJS = function() {
         },
 
         animateFlip() {
-            this.flipSecond = true;
             this.showCount.back.seconds = this.countTime.seconds;
+            this.showCount.back.minutes = this.countTime.minutes;
+            this.showCount.back.hours = this.countTime.hours;
+            this.showCount.back.days = this.countTime.days;
+            this.flipSecond = true;
+            if ( this.showCount.back.minutes !== this.showCount.front.minutes) {
+                this.flipMinute = true;
+            }
+            if ( this.showCount.back.hours !== this.showCount.front.hours) {
+                this.flipHour = true;
+            }
+            if ( this.showCount.back.days !== this.showCount.front.days) {
+                this.flipDay = true;
+            }
             setTimeout(function() {
                 setTimeout(function() {
                     this.showCount.front.seconds = this.countTime.seconds
+                    this.showCount.front.minutes = this.countTime.minutes;
+                    this.showCount.front.hours = this.countTime.hours;
+                    this.showCount.front.days = this.countTime.days;
                 }.bind(this), 850)
                 this.flipSecond = false
+                this.flipMinute = false
+                this.flipHour = false
+                this.flipDay = false
             }.bind(this), 900)
         }
 
