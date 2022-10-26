@@ -4,112 +4,99 @@ window.countdownJS = function() {
         flipHour: false,
         flipMinute: false,
         flipSecond: false,
-
-        // launchDate: Alpine.$persist(),
-        // launch: this.now,
-        // launchDate: this.launch.setDate(this.now.getDate() + 14),
-
-
-        // set launchdate (14 days from now) , save this date with persist
-        // find time now V
-        // find difference now - launchdate V
-        // calculate difference every second V
-
-        // show time
-        // change back card
-        // animate
-        // change front card
-        // repeat
-        // reset to 14 days when time is up
-
-        countTime: {},
+        launchDate: false,
+        launchDateMicroseconds: Alpine.$persist(false),
+        timeToLaunch: {},
         showCount: {
-            back: {
-                days: '',
-                hours: '',
-                minutes: '',
-                seconds: ''
-            },
-            front: {
-                days: '',
-                hours: '',
-                minutes: '',
-                seconds: ''
-            }
+            days: '',
+            hours: '',
+            minutes: '',
+            seconds: ''
         },
 
         setCountdown() {
-            let launchDate = new Date("October 28, 2022 15:01:00");
-            let launchSeconds = Date.parse(launchDate) / 1000;
+            let launchSeconds = Date.parse(this.launchDate) / 1000;
 
             let now = new Date();
             let nowSeconds = Date.parse(now) / 1000;
 
-            let launchSet = {}
+            this.timeToLaunch.timeLeft = launchSeconds - nowSeconds;
 
-            launchSet.timeLeft = launchSeconds - nowSeconds;
+            this.timeToLaunch.days = Math.floor(this.timeToLaunch.timeLeft / 86400);
+            this.timeToLaunch.hours = Math.floor((this.timeToLaunch.timeLeft - this.timeToLaunch.days * 86400) / 3600);
+            this.timeToLaunch.minutes = Math.floor((this.timeToLaunch.timeLeft - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600) / 60);
+            this.timeToLaunch.seconds = Math.floor(this.timeToLaunch.timeLeft - this.timeToLaunch.days * 86400 - this.timeToLaunch.hours * 3600 - this.timeToLaunch.minutes * 60);
 
-            launchSet.days = Math.floor(launchSet.timeLeft / 86400);
-            launchSet.hours = Math.floor((launchSet.timeLeft - launchSet.days * 86400) / 3600);
-            launchSet.minutes = Math.floor((launchSet.timeLeft - launchSet.days * 86400 - launchSet.hours * 3600) / 60);
-            launchSet.seconds = Math.floor(launchSet.timeLeft - launchSet.days * 86400 - launchSet.hours * 3600 - launchSet.minutes * 60);
-
-            if (launchSet.days < "10") {
-                launchSet.days = "0" + launchSet.days;
+            if (this.timeToLaunch.days < "10") {
+                this.timeToLaunch.days = "0" + this.timeToLaunch.days;
             }
-            else if (launchSet.days < "0") {
-                launchSet.days = "00";
+            else if (this.timeToLaunch.days < "0") {
+                this.timeToLaunch.days = "00";
             }
-            if (launchSet.hours < "10") {
-                launchSet.hours = "0" + launchSet.hours;
+            if (this.timeToLaunch.hours < "10") {
+                this.timeToLaunch.hours = "0" + this.timeToLaunch.hours;
             }
-            else if (launchSet.hours < "0") {
-                launchSet.hours = "00";
+            else if (this.timeToLaunch.hours < "0") {
+                this.timeToLaunch.hours = "00";
             }
-            if (launchSet.minutes < "10") {
-                launchSet.minutes = "0" + launchSet.minutes;
+            if (this.timeToLaunch.minutes < "10") {
+                this.timeToLaunch.minutes = "0" + this.timeToLaunch.minutes;
             }
-            else if (launchSet.minutes < "0") {
-                launchSet.minutes = "00";
+            else if (this.timeToLaunch.minutes < "0") {
+                this.timeToLaunch.minutes = "00";
             }
-            if (launchSet.seconds < "10") {
-                launchSet.seconds = "0" + launchSet.seconds;
+            if (this.timeToLaunch.seconds < "10") {
+                this.timeToLaunch.seconds = "0" + this.timeToLaunch.seconds;
             }
-            else if (launchSet.seconds < "0") {
-                launchSet.seconds = "00";
+            else if (this.timeToLaunch.seconds < "0") {
+                this.timeToLaunch.seconds = "00";
             }
 
-            return this.countTime = launchSet;
+            return this.timeToLaunch = this.timeToLaunch;
         },
 
-        startCountDown() {
-            let countdown = setInterval(() => {
+        init() {
+            if(this.launchDateMicroseconds) {
+                if (this.launchDateMicroseconds < 0) {
+                    this.launchDate = new Date();
+                    this.launchDateMicroseconds = Date.parse(this.launchDate);
+                } else {
+                    this.launchDate = new Date(this.launchDateMicroseconds);
+                    }
+            } else {
+                this.launchDate = new Date();
+                this.launchDateMicroseconds = Date.parse(this.launchDate);
+            }
+
+            this.launchDate.setUTCDate(this.launchDate.getDate() + 14);
+
+            setInterval(() => {
                 this.setCountdown();
                 this.animateFlip();
             }, 1000)
         },
 
         animateFlip() {
-            this.showCount.back.seconds = this.countTime.seconds
-            this.showCount.back.minutes = this.countTime.minutes
-            this.showCount.back.hours = this.countTime.hours
-            this.showCount.back.days = this.countTime.days
+            this.timeToLaunch.seconds = this.timeToLaunch.seconds
+            this.timeToLaunch.minutes = this.timeToLaunch.minutes
+            this.timeToLaunch.hours = this.timeToLaunch.hours
+            this.timeToLaunch.days = this.timeToLaunch.days
             this.flipSecond = true
-            if ( this.showCount.back.minutes !== this.showCount.front.minutes) {
+            if ( this.timeToLaunch.minutes !== this.showCount.minutes) {
                 this.flipMinute = true
             }
-            if ( this.showCount.back.hours !== this.showCount.front.hours) {
+            if ( this.timeToLaunch.hours !== this.showCount.hours) {
                 this.flipHour = true
             }
-            if ( this.showCount.back.days !== this.showCount.front.days) {
+            if ( this.timeToLaunch.days !== this.showCount.days) {
                 this.flipDay = true
             }
             setTimeout(function() {
                 setTimeout(function() {
-                    this.showCount.front.seconds = this.countTime.seconds
-                    this.showCount.front.minutes = this.countTime.minutes
-                    this.showCount.front.hours = this.countTime.hours
-                    this.showCount.front.days = this.countTime.days
+                    this.showCount.seconds = this.timeToLaunch.seconds
+                    this.showCount.minutes = this.timeToLaunch.minutes
+                    this.showCount.hours = this.timeToLaunch.hours
+                    this.showCount.days = this.timeToLaunch.days
                 }.bind(this), 850)
                 this.flipSecond = false
                 this.flipMinute = false
