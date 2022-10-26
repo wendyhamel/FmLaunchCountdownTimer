@@ -39,7 +39,10 @@
     .backface-hidden {
       backface-visibility: hidden
     }
-    .rotate-x {
+    .rotate-x-0 {
+        transform:rotateX(0deg)
+    }
+    .rotate-x-180 {
       transform:rotateX(180deg)
     }
   </style>
@@ -74,12 +77,12 @@
               </div>
             </div>
             <div class="transform-3d origin-bottom relative border-t border-blue-dark w-[68px] h-[33px] md:w-[146px] md:h-[70px]" :class="{'animate-flip' : flipDay}">
-              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+              <div class="backface-hidden rotate-x-0 absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
                 <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
                   <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="showCount.days"></span>
                 </div>
               </div>
-              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+              <div class="backface-hidden rotate-x-180 grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
                 <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="timeToLaunch.days"></span>
               </div>
             </div>
@@ -99,12 +102,12 @@
               </div>
             </div>
             <div class="transform-3d origin-bottom relative border-t border-blue-dark w-[68px] h-[33px] md:w-[146px] md:h-[70px]" :class="{'animate-flip' : flipHour}">
-              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+              <div class="backface-hidden rotate-x-0 absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
                 <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
                   <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="showCount.hours"></span>
                 </div>
               </div>
-              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+              <div class="backface-hidden rotate-x-180 grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
                 <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="timeToLaunch.hours"></span>
               </div>
             </div>
@@ -124,12 +127,12 @@
               </div>
             </div>
             <div class="transform-3d origin-bottom relative border-t border-blue-dark w-[68px] h-[33px] md:w-[146px] md:h-[70px]" :class="{'animate-flip' : flipMinute}">
-              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+              <div class="backface-hidden rotate-x-0 absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
                 <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
                   <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="showCount.minutes"></span>
                 </div>
               </div>
-              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+              <div class="backface-hidden rotate-x-180 grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
                 <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="timeToLaunch.minutes"></span>
               </div>
             </div>
@@ -149,12 +152,12 @@
               </div>
             </div>
             <div class="transform-3d origin-bottom relative border-t border-blue-dark w-[68px] h-[33px] md:w-[146px] md:h-[70px]" :class="{'animate-flip' : flipSecond}">
-              <div class="backface-hidden absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
+              <div class="backface-hidden rotate-x-0 absolute z-20 bg-blue-des w-full h-full rounded-t md:rounded-t-lg">
                 <div class="bg-blue-dark/30 w-full h-full grid place-content-center overflow-hidden">
                   <span class="text-red-shaded font-bold text-4xl leading-none translate-y-[calc(50%-1.5px)] md:text-7.5xl md:translate-y-[calc(50%-5px)]" x-text="showCount.seconds"></span>
                 </div>
               </div>
-              <div class="backface-hidden rotate-x grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
+              <div class="backface-hidden rotate-x-180 grid place-content-center absolute z-10 bg-blue-des w-full h-full overflow-hidden rounded-b md:rounded-b-lg">
                 <span class="text-red font-bold text-4xl leading-none -translate-y-[calc(50%-1.5px)] md:text-7.5xl md:-translate-y-[calc(50%-5px)]" x-text="timeToLaunch.seconds"></span>
               </div>
             </div>
