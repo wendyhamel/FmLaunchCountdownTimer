@@ -39,7 +39,7 @@ window.countdownJS = function() {
         },
 
         setCountdown() {
-            let launchDate = new Date("October 30, 2022 13:55:00");
+            let launchDate = new Date("October 28, 2022 15:01:00");
             let launchSeconds = Date.parse(launchDate) / 1000;
 
             let now = new Date();
@@ -83,33 +83,33 @@ window.countdownJS = function() {
         },
 
         startCountDown() {
-            setInterval(() => {
+            let countdown = setInterval(() => {
                 this.setCountdown();
                 this.animateFlip();
             }, 1000)
         },
 
         animateFlip() {
-            this.showCount.back.seconds = this.countTime.seconds;
-            this.showCount.back.minutes = this.countTime.minutes;
-            this.showCount.back.hours = this.countTime.hours;
-            this.showCount.back.days = this.countTime.days;
-            this.flipSecond = true;
+            this.showCount.back.seconds = this.countTime.seconds
+            this.showCount.back.minutes = this.countTime.minutes
+            this.showCount.back.hours = this.countTime.hours
+            this.showCount.back.days = this.countTime.days
+            this.flipSecond = true
             if ( this.showCount.back.minutes !== this.showCount.front.minutes) {
-                this.flipMinute = true;
+                this.flipMinute = true
             }
             if ( this.showCount.back.hours !== this.showCount.front.hours) {
-                this.flipHour = true;
+                this.flipHour = true
             }
             if ( this.showCount.back.days !== this.showCount.front.days) {
-                this.flipDay = true;
+                this.flipDay = true
             }
             setTimeout(function() {
                 setTimeout(function() {
                     this.showCount.front.seconds = this.countTime.seconds
-                    this.showCount.front.minutes = this.countTime.minutes;
-                    this.showCount.front.hours = this.countTime.hours;
-                    this.showCount.front.days = this.countTime.days;
+                    this.showCount.front.minutes = this.countTime.minutes
+                    this.showCount.front.hours = this.countTime.hours
+                    this.showCount.front.days = this.countTime.days
                 }.bind(this), 850)
                 this.flipSecond = false
                 this.flipMinute = false
